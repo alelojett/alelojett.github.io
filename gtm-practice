@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM Tracking Challenge</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .challenge-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .challenge-section h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        .interaction-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .primary-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+        }
+        .secondary-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+        }
+        .tertiary-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 10px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .same-class-btns button {
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .event-log {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .event-log h3 {
+            margin-top: 0;
+        }
+        .event-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: white;
+            border-left: 3px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5HNTJGHR');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HNTJGHR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <h1>GTM Tracking Challenge</h1>
+        <p>This page contains various UI elements for practicing GTM implementation and GA4 event tracking. Explore the elements below and configure your GTM container to track interactions.</p>
+    </header>
+
+    <div class="challenge-section">
+        <h2>Challenge 1: Button with Specific CSS Selector</h2>
+        <p>Track clicks on this button using its unique CSS class <code>.primary-btn</code>.</p>
+        <div class="interaction-area">
+            <button class="primary-btn" id="primary-button">Click Me (Primary Button)</button>
+        </div>
+    </div>
+
+    <div class="challenge-section">
+        <h2>Challenge 2: Link Tracking</h2>
+        <p>Track clicks on this link element.</p>
+        <div class="interaction-area">
+            <a href="#link-section" id="tracking-link">Click this link to navigate</a>
+        </div>
+    </div>
+
+    <div class="challenge-section">
+        <h2>Challenge 3: Buttons with Same CSS Selector but Different Attributes</h2>
+        <p>Track these two buttons separately even though they share the same CSS class <code>.same-class-btn</code>. Use the data-gtm attribute to differentiate them.</p>
+        <div class="interaction-area same-class-btns">
+            <button class="same-class-btn" data-gtm="button-one">Same Class Button One</button>
+            <button class="same-class-btn" data-gtm="button-two">Same Class Button Two</button>
+        </div>
+    </div>
+
+    <div class="challenge-section">
+        <h2>Challenge 4: DataLayer Variables</h2>
+        <p>These buttons push different data to the dataLayer. Configure GTM to capture these variables.</p>
+        <div class="interaction-area">
+            <button class="secondary-btn" id="product-view-btn">Track Product View</button>
+            <button class="tertiary-btn" id="add-to-cart-btn">Track Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="event-log">
+        <h3>Event Log</h3>
+        <p>This section displays dataLayer events as they occur:</p>
+        <div id="events-container"></div>
+    </div>
+
+    <script>
+        // Initialize dataLayer
+        window.dataLayer = window.dataLayer || [];
+        
+        // Function to log events to the UI
+        function logEvent(eventName, eventData) {
+            const eventsContainer = document.getElementById('events-container');
+            const eventItem = document.createElement('div');
+            eventItem.className = 'event-item';
+            
+            const eventTime = new Date().toLocaleTimeString();
+            eventItem.innerHTML = `
+                <strong>${eventTime} - ${eventName}</strong>
+                <pre>${JSON.stringify(eventData, null, 2)}</pre>
+            `;
+            
+            eventsContainer.prepend(eventItem);
+        }
+
+        // Challenge 1: Button with specific CSS selector
+        document.querySelector('.primary-btn').addEventListener('click', function() {
+            const eventData = {
+                event: 'button_click',
+                button_type: 'primary',
+                button_id: this.id,
+                timestamp: new Date().toISOString()
+            };
+            
+            dataLayer.push(eventData);
+            logEvent('button_click', eventData);
+        });
+
+        // Challenge 2: Link tracking
+        document.getElementById('tracking-link').addEventListener('click', function(e) {
+            const eventData = {
+                event: 'link_click',
+                link_id: this.id,
+                link_url: this.href,
+                timestamp: new Date().toISOString()
+            };
+            
+            dataLayer.push(eventData);
+            logEvent('link_click', eventData);
+        });
+
+        // Challenge 3: Buttons with same CSS class but different data attributes
+        document.querySelectorAll('.same-class-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const gtmValue = this.getAttribute('data-gtm');
+                const eventData = {
+                    event: 'same_class_button_click',
+                    button_gtm_value: gtmValue,
+                    timestamp: new Date().toISOString()
+                };
+                
+                dataLayer.push(eventData);
+                logEvent('same_class_button_click', eventData);
+            });
+        });
+
+        // Challenge 4: DataLayer Variables for different events
+        document.getElementById('product-view-btn').addEventListener('click', function() {
+            const eventData = {
+                event: 'view_item',
+                ecommerce: {
+                    items: [{
+                        item_id: 'SKU12345',
+                        item_name: 'Example Product',
+                        price: 19.99,
+                        currency: 'USD',
+                        item_category: 'Electronics'
+                    }]
+                },
+                timestamp: new Date().toISOString()
+            };
+            
+            dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object
+            dataLayer.push(eventData);
+            logEvent('view_item', eventData);
+        });
+
+        document.getElementById('add-to-cart-btn').addEventListener('click', function() {
+            const eventData = {
+                event: 'add_to_cart',
+                ecommerce: {
+                    items: [{
+                        item_id: 'SKU12345',
+                        item_name: 'Example Product',
+                        price: 19.99,
+                        quantity: 1,
+                        currency: 'USD',
+                        item_category: 'Electronics'
+                    }]
+                },
+                user_status: 'logged_in',
+                timestamp: new Date().toISOString()
+            };
+            
+            dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object
+            dataLayer.push(eventData);
+            logEvent('add_to_cart', eventData);
+        });
+    </script>
+</body>
+</html>
