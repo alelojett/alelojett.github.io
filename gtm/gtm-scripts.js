@@ -17,7 +17,32 @@ function initGTM(containerId) {
     })(window,document,'script','dataLayer',containerId);
 }
 
+// Función para generar los noscript
+function generateNoscriptTags() {
+    const noscriptContainer = document.createElement('div');
+    noscriptContainer.id = 'gtm-noscript-container';
+    
+    gtmContainers.forEach(containerId => {
+        const noscript = document.createElement('noscript');
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.googletagmanager.com/ns.html?id=${containerId}`;
+        iframe.height = '0';
+        iframe.width = '0';
+        iframe.style.display = 'none';
+        iframe.style.visibility = 'hidden';
+        
+        noscript.appendChild(iframe);
+        noscriptContainer.appendChild(noscript);
+    });
+    
+    // Insertar los noscript justo después de la apertura del body
+    document.body.insertBefore(noscriptContainer, document.body.firstChild);
+}
+
 // Inicializar todos los contenedores
 gtmContainers.forEach(containerId => {
     initGTM(containerId);
-}); 
+});
+
+// Generar los noscript cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', generateNoscriptTags); 
