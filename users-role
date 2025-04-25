@@ -1,0 +1,296 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Initial DataLayer and User Properties Configuration -->
+    <script>
+        // Inicializar dataLayer antes que todo
+        window.dataLayer = window.dataLayer || [];
+        
+        // Configurar user properties inmediatamente
+        window.dataLayer.push({
+            'user_properties': {
+                'user_role': 'default'
+            },
+            'event': 'user_properties_set'
+        });
+
+        // Función para configurar gtag cuando esté disponible
+        function initializeGtag() {
+            if (typeof gtag === 'function') {
+                gtag('set', 'user_properties', {
+                    user_role: 'default'
+                });
+                console.log('Gtag user properties initialized with default');
+            }
+        }
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5HNTJGHR');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D6Y04V93B2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-D6Y04V93B2');
+        // Intentar configurar user properties después de la configuración de GA4
+        initializeGtag();
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .nav-links {
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .primary { 
+            background-color: #007bff; 
+            color: white; 
+        }
+
+        .secondary { 
+            background-color: #6c757d; 
+            color: white; 
+        }
+
+        .success { 
+            background-color: #28a745; 
+            color: white; 
+        }
+
+        button:hover { 
+            opacity: 0.9; 
+        }
+
+        .event-log {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            font-family: monospace;
+            padding: 8px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        .success:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+        }
+
+        .primary:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+        }
+
+        .secondary:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HNTJGHR" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="persistence.html">Ir a página de prueba de persistencia →</a>
+        </div>
+
+        <h1>Test de User Properties en GA4</h1>
+
+        <div class="button-group">
+            <button onclick="sendCustomEvent('test_event_1')" class="primary">
+                Evento de Prueba 1
+            </button>
+            
+            <button onclick="sendCustomEvent('test_event_2')" class="secondary">
+                Evento de Prueba 2
+            </button>
+            
+            <button onclick="updateUserRole()" class="success">
+                Actualizar Rol de Usuario
+            </button>
+        </div>
+
+        <div class="event-log">
+            <h3>Registro de Eventos:</h3>
+            <div id="eventLog"></div>
+        </div>
+    </div>
+
+    <script>
+        // Función para esperar a que gtag esté disponible
+        function waitForGtag(callback, maxAttempts = 10) {
+            let attempts = 0;
+            const checkGtag = () => {
+                attempts++;
+                if (typeof gtag === 'function') {
+                    callback();
+                } else if (attempts < maxAttempts) {
+                    setTimeout(checkGtag, 500);
+                } else {
+                    console.error('No se pudo cargar gtag después de múltiples intentos');
+                }
+            };
+            checkGtag();
+        }
+
+        // Función para registrar eventos en la UI
+        function logEvent(eventDetails) {
+            const logDiv = document.getElementById('eventLog');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = `${new Date().toLocaleTimeString()}: ${JSON.stringify(eventDetails)}`;
+            logDiv.insertBefore(logEntry, logDiv.firstChild);
+        }
+
+        // Función para enviar eventos tanto a GA4 como al dataLayer
+        function sendCustomEvent(eventName) {
+            const eventParams = {
+                event_category: 'user_interaction',
+                event_label: eventName
+            };
+
+            // Enviar al dataLayer
+            dataLayer.push({
+                'event': eventName,
+                ...eventParams
+            });
+
+            // Enviar a GA4 si está disponible
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, eventParams);
+            }
+
+            // Registrar en la UI
+            logEvent({
+                event: eventName,
+                ...eventParams
+            });
+        }
+
+        // Función para actualizar user properties
+        function updateUserRole() {
+            const roles = ['default', 'administrator', 'editor', 'viewer'];
+            const currentRole = document.querySelector('.success').textContent.includes('default') ? 
+                'administrator' : document.querySelector('.success').textContent.includes('administrator') ? 
+                'editor' : document.querySelector('.success').textContent.includes('editor') ? 
+                'viewer' : 'default';
+
+            // Actualizar en dataLayer
+            dataLayer.push({
+                'event': 'user_role_updated',
+                'user_properties': {
+                    'user_role': currentRole
+                }
+            });
+
+            // Actualizar en GA4 si está disponible
+            if (typeof gtag === 'function') {
+                gtag('set', 'user_properties', {
+                    user_role: currentRole
+                });
+            }
+
+            // Actualizar texto del botón
+            document.querySelector('.success').textContent = `Rol Actual: ${currentRole}`;
+
+            // Registrar en la UI
+            logEvent({
+                event: 'user_role_updated',
+                new_role: currentRole
+            });
+        }
+
+        // Inicializar cuando el documento esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            waitForGtag(() => {
+                console.log('GA4 inicializado correctamente');
+                document.querySelector('.success').textContent = 'Rol Actual: default';
+            });
+        });
+    </script>
+</body>
+</html>
