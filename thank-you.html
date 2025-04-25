@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por tu Compra! - Concierto Estelar 2024</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        fetch('gtm/gtm-scripts.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>¡Gracias por tu Compra!</h1>
+        </header>
+
+        <main>
+            <section id="confirmation">
+                <div class="confirmation-message">
+                    <h2>Tu compra ha sido confirmada</h2>
+                    <p>Hemos enviado los detalles de tu compra a tu correo electrónico.</p>
+                    <div class="order-summary">
+                        <h3>Resumen de tu pedido:</h3>
+                        <p id="ticket-type"></p>
+                        <p id="buyer-name"></p>
+                        <p id="buyer-email"></p>
+                        <p id="ticket-price"></p> <!-- Aquí se mostrará el precio -->
+                    </div>
+                    <a href="index.html" class="buy-button">Volver al inicio</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 Concierto Estelar. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Recuperar los datos de la URL
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById('ticket-type').textContent = `Tipo de Boleto: ${params.get('ticketType')}`;
+            document.getElementById('buyer-name').textContent = `Nombre: ${params.get('name')}`;
+            document.getElementById('buyer-email').textContent = `Email: ${params.get('email')}`;
+            document.getElementById('ticket-price').textContent = `Precio: $${params.get('price')}`; // Mostrar el precio
+        }
+    </script>
+</body>
+</html>

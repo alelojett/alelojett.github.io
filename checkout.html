@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Concierto Estelar 2024</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Cargar el archivo gtm-scripts.html
+        fetch('gtm/gtm-scripts.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Checkout</h1>
+            <p>Completa tu compra</p>
+        </header>
+
+        <main>
+            <section id="purchase-form">
+                <h2>Formulario de Compra</h2>
+                <form id="ticket-form" onsubmit="submitPurchase(event)">
+                    <div>
+                        <label for="name">Nombre:</label><br>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label><br>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="buy-button">Finalizar Compra</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 Concierto Estelar. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Obtener el tipo de boleto seleccionado de la URL
+        const params = new URLSearchParams(window.location.search);
+        const ticketType = params.get('ticketType');
+        document.querySelector('header p').textContent = `Has seleccionado: ${ticketType}`;
+        
+        function submitPurchase(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const ticketType = new URLSearchParams(window.location.search).get('ticketType');
+            
+            // Definir el precio según el tipo de boleto
+            const price = ticketType === 'general' ? 50 : ticketType === 'vip' ? 150 : 0; // Asumiendo que estos son los precios
+
+            // Redirigir a la página de agradecimiento con los parámetros
+            window.location.href = `thank-you.html?ticketType=${ticketType}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&price=${price}`;
+        }
+    </script>
+</body>
+</html>
