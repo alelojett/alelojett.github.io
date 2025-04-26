@@ -1,7 +1,10 @@
 // Configuración de contenedores GTM
 const gtmContainers = [
-    'GTM-K2W4BZGL',
-    'GTM-XXXXXXX' // Reemplaza con tu segundo ID de GTM
+    'GTM-K2W4BZGL', // Codigo de Alexis
+    'GTM-W9M7L2R', // Codigo de Iohan
+    'GTM-GTM-MZKXDKWP', // Codigo Omar
+    'GTM-P4T82SZ2', // Codigo de Valeria  
+
 ];
 
 // Función para inicializar un contenedor GTM
