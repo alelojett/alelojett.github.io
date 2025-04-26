@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prácticas de Google Tag Manager</title>
+    <title>Proyectos de Práctica</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,6 +16,12 @@
         }
         h1, h2 {
             color: #333;
+        }
+        .project-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
         }
         .file-list {
             list-style-type: none;
@@ -31,6 +37,9 @@
             text-decoration: none;
             color: #0066cc;
         }
+        .file-list a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -39,14 +48,43 @@
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- End Google Tag Manager (noscript) -->
     
-    <h1>Prácticas de Google Tag Manager</h1>
-    <p>Este directorio contiene ejemplos y prácticas relacionadas con la implementación de Google Tag Manager.</p>
+    <h1>Proyectos de Práctica</h1>
+    <p>Este repositorio contiene diferentes proyectos y prácticas relacionadas con desarrollo web y análisis de datos.</p>
     
-    <h2>Archivos Disponibles</h2>
-    <ul class="file-list">
-        <li>
-            <a href="gtm-practice.html">gtm-practice.html</a> - Ejemplos prácticos de implementación de GTM
-        </li>
-    </ul>
+    <div class="project-section">
+        <h2>Concierto Estelar</h2>
+        <p>Proyecto de venta de boletos para concierto con implementación de GTM.</p>
+        <ul class="file-list">
+            <li>
+                <a href="concert/index.html">Página Principal</a> - Información general y opciones de boletos
+            </li>
+            <li>
+                <a href="concert/checkout.html">Checkout</a> - Página de pago para la compra de boletos
+            </li>
+            <li>
+                <a href="concert/thank-you.html">Thank You</a> - Página de confirmación después de la compra
+            </li>
+        </ul>
+    </div>
+
+    <div class="project-section">
+        <h2>Prácticas de Google Tag Manager</h2>
+        <p>Ejemplos y prácticas relacionadas con la implementación de Google Tag Manager.</p>
+        <ul class="file-list">
+            <li>
+                <a href="gtm-practice/gtm-practice.html">Prácticas GTM</a> - Ejemplos prácticos de implementación
+            </li>
+        </ul>
+    </div>
+
+    <div class="project-section">
+        <h2>Roles de Usuario</h2>
+        <p>Ejemplos de implementación de roles y permisos de usuario.</p>
+        <ul class="file-list">
+            <li>
+                <a href="user-role/users-role.html">Roles de Usuario</a> - Implementación de roles y permisos
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
