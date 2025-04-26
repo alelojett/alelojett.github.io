@@ -1,53 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script src="gtm/gtm-scripts.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concierto Estelar 2024</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="gtm/gtm-scripts.js"></script>
+    <title>Prácticas de Google Tag Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .file-list a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Concierto Estelar 2024</h1>
-            <p>¡La experiencia musical del año!</p>
-        </header>
-
-        <main>
-            <section id="artist-info">
-                <h2>Artista Principal</h2>
-                <p>Disfruta de una noche mágica con las mejores interpretaciones en vivo.</p>
-            </section>
-
-            <section id="tickets">
-                <h2>Boletos Disponibles</h2>
-                <div class="ticket-option">
-                    <h3>Entrada General</h3>
-                    <p>Acceso general al concierto</p>
-                    <p>Precio: $50</p>
-                    <button class="buy-button" onclick="redirectToCheckout('general')">Comprar</button>
-                </div>
-                <div class="ticket-option">
-                    <h3>VIP</h3>
-                    <p>Acceso preferencial + Meet & Greet</p>
-                    <p>Precio: $150</p>
-                    <button class="buy-button" onclick="redirectToCheckout('vip')">Comprar</button>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>© 2024 Concierto Estelar. Todos los derechos reservados.</p>
-        </footer>
-    </div>
-
-    <script>
-        function redirectToCheckout(type) {
-            // Redirigir a la página de checkout con el tipo de boleto seleccionado
-            window.location.href = `checkout.html?ticketType=${type}`;
-        }
-    </script>
-    <script src="js/analytics.js"></script>
+          <!-- Google Tag Manager (noscript) -->
+          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            <!-- End Google Tag Manager (noscript) -->
+    
+    <h1>Prácticas de Google Tag Manager</h1>
+    <p>Este directorio contiene ejemplos y prácticas relacionadas con la implementación de Google Tag Manager.</p>
+    
+    <h2>Archivos Disponibles</h2>
+    <ul class="file-list">
+        <li>
+            <a href="gtm-practice.html">gtm-practice.html</a> - Ejemplos prácticos de implementación de GTM
+        </li>
+    </ul>
 </body>
 </html>
