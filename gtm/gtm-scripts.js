@@ -3,7 +3,7 @@ const gtmContainers = [
     'GTM-K2W4BZGL', // Codigo de Alexis
     'GTM-W9M7L2R', // Codigo de Iohan
     'GTM-GTM-MZKXDKWP', // Codigo Omar
-    'GTM-P4T82SZ2', // Codigo de Valeria  
+    'GTM-P4T82SZ2' // Codigo de Valeria  
 
 ];
 
