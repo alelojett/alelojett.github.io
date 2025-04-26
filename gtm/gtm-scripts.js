@@ -1,25 +1,16 @@
 // Configuración de contenedores GTM
 const gtmContainers = [
-    {
-        id: 'GTM-K2W4BZGL',
-        name: 'dataLayer1'  // DataLayer para Alexis
-    },
-    {
-        id: 'GTM-W9M7L2R',
-        name: 'dataLayer2'  // DataLayer para Iohan
-    },
-    {
-        id: 'GTM-MZKXDKWP',
-        name: 'dataLayer3'  // DataLayer para Omar
-    },
-    {
-        id: 'GTM-P4T82SZ2',
-        name: 'dataLayer4'  // DataLayer para Valeria
-    }
+    'GTM-K2W4BZGL', // Alexis
+    'GTM-W9M7L2R',  // Iohan
+    'GTM-MZKXDKWP', // Omar
+    'GTM-P4T82SZ2'  // Valeria
 ];
 
+// Inicializar el dataLayer
+window.dataLayer = window.dataLayer || [];
+
 // Función para inicializar un contenedor GTM
-function initGTM(container) {
+function initGTM(containerId) {
     (function(w,d,s,l,i){
         w[l]=w[l]||[];
         w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
@@ -28,7 +19,7 @@ function initGTM(container) {
         j.async=true;
         j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
         f.parentNode.insertBefore(j,f);
-    })(window,document,'script',container.name,container.id);
+    })(window,document,'script','dataLayer',containerId);
 }
 
 // Función para generar los noscript
@@ -36,10 +27,10 @@ function generateNoscriptTags() {
     const noscriptContainer = document.createElement('div');
     noscriptContainer.id = 'gtm-noscript-container';
     
-    gtmContainers.forEach(container => {
+    gtmContainers.forEach(containerId => {
         const noscript = document.createElement('noscript');
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.googletagmanager.com/ns.html?id=${container.id}`;
+        iframe.src = `https://www.googletagmanager.com/ns.html?id=${containerId}`;
         iframe.height = '0';
         iframe.width = '0';
         iframe.style.display = 'none';
@@ -54,8 +45,8 @@ function generateNoscriptTags() {
 }
 
 // Inicializar todos los contenedores
-gtmContainers.forEach(container => {
-    initGTM(container);
+gtmContainers.forEach(containerId => {
+    initGTM(containerId);
 });
 
 // Generar los noscript cuando el DOM esté listo
