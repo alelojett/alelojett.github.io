@@ -1,15 +1,15 @@
 // Configuración de GTM tags
 const gtmConfig = [
     {
-        id: 'GTM-5SGFTGB9',
+        id: 'GTM-W9M7L2RV',
         name: 'Iohan'
     },
     {
-        id: 'GTM-5L7MRV3S',
+        id: 'GTM-MZKXDKWP',
         name: 'Omar'
     },
     {
-        id: 'GTM-5V4G2KHR',
+        id: 'GTM-P4T82SZ2',
         name: 'Valeria'
     },
     {
