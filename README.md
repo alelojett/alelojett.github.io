@@ -14,6 +14,9 @@
      - `price`: Precio del boleto
      - `currency`: "USD"
 
+## Ruta para entrar a la pagina:
+https://alelojett.github.io
+
 ## Páginas y Funcionalidades
 
 ### Página Principal (index.html)
