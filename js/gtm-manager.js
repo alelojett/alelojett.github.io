@@ -22,9 +22,13 @@ const gtmConfig = [
     }
 ];
 
-// Inicializar dataLayers
+// Inicializar dataLayers y configurar eventos iniciales
 gtmConfig.forEach(config => {
     window[config.dataLayer] = window[config.dataLayer] || [];
+    window[config.dataLayer].push({
+        'event': 'gtm.js',
+        'gtm.start': new Date().getTime()
+    });
 });
 
 // Función para insertar los scripts de GTM en el head
@@ -34,11 +38,8 @@ function insertGTMScripts() {
     gtmConfig.forEach(config => {
         // Crear el script de GTM
         const script = document.createElement('script');
-        script.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','${config.dataLayer}','${config.id}');`;
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtm.js?id=${config.id}&l=${config.dataLayer}`;
         
         // Insertar el script al principio del head
         head.insertBefore(script, head.firstChild);
@@ -52,7 +53,7 @@ function insertGTMNoscripts() {
     gtmConfig.forEach(config => {
         const noscript = document.createElement('noscript');
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.googletagmanager.com/ns.html?id=${config.id}`;
+        iframe.src = `https://www.googletagmanager.com/ns.html?id=${config.id}&l=${config.dataLayer}`;
         iframe.height = "0";
         iframe.width = "0";
         iframe.style.display = "none";
@@ -62,6 +63,19 @@ function insertGTMNoscripts() {
     });
 }
 
-// Inicializar GTM inmediatamente
-insertGTMScripts();
-insertGTMNoscripts(); 
+// Función para inicializar GTM
+function initializeGTM() {
+    // Asegurarse de que el DOM esté listo
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            insertGTMScripts();
+            insertGTMNoscripts();
+        });
+    } else {
+        insertGTMScripts();
+        insertGTMNoscripts();
+    }
+}
+
+// Inicializar GTM
+initializeGTM(); 
