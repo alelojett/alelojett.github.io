@@ -2,24 +2,30 @@
 const gtmConfig = [
     {
         id: 'GTM-W9M7L2RV',
-        name: 'Iohan'
+        name: 'Iohan',
+        dataLayer: 'dataLayerIohan'
     },
     {
         id: 'GTM-MZKXDKWP',
-        name: 'Omar'
+        name: 'Omar',
+        dataLayer: 'dataLayerOmar'
     },
     {
         id: 'GTM-P4T82SZ2',
-        name: 'Valeria'
+        name: 'Valeria',
+        dataLayer: 'dataLayerValeria'
     },
     {
         id: 'GTM-K2W4BZGL',
-        name: 'Alexis'
+        name: 'Alexis',
+        dataLayer: 'dataLayerAlexis'
     }
 ];
 
-// Inicializar dataLayer
-window.dataLayer = window.dataLayer || [];
+// Inicializar dataLayers
+gtmConfig.forEach(config => {
+    window[config.dataLayer] = window[config.dataLayer] || [];
+});
 
 // Función para insertar los scripts de GTM en el head
 function insertGTMScripts() {
@@ -32,7 +38,7 @@ function insertGTMScripts() {
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','${config.id}');`;
+        })(window,document,'script','${config.dataLayer}','${config.id}');`;
         
         // Insertar el script al principio del head
         head.insertBefore(script, head.firstChild);
