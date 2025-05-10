@@ -11,9 +11,9 @@
         f.parentNode.insertBefore(j, f);
     });
 })(window, document, 'script', 'dataLayer', [
-    'GTM-K2W4BZGL', // Alexis
     'GTM-5L7MRV3S', // Omar
     'GTM-5V4G2KHR', // Valeria
-    'GTM-5SGFTGB9' // Iohan
+    'GTM-5SGFTGB9', // Iohan
+    'GTM-K2W4BZGL' // Alexis
 
 ]);
