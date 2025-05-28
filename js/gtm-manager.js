@@ -14,6 +14,7 @@
     'GTM-K2W4BZGL', // Alexis
     'GTM-5L7MRV3S', // Omar
     'GTM-5V4G2KHR', // Valeria
-    'GTM-5SGFTGB9' // Iohan
-
+    'GTM-5SGFTGB9', // Iohan
+    'GTM-TG27FXL4', // Diana
+    'GTM-5K33CWS9' // David
 ]);
